@@ -1,0 +1,79 @@
+PODS:
+  - agora_rtc (0.0.1):
+    - Flutter
+    - ShengwangRtcEngine_iOS (= 4.6.2)
+  - Flutter (1.0.0)
+  - integration_test (0.0.1):
+    - Flutter
+  - permission_handler_apple (9.3.0):
+    - Flutter
+  - ShengwangInfra_iOS (1.3.5)
+  - ShengwangRtcEngine_iOS (4.6.2):
+    - ShengwangRtcEngine_iOS/AIAEC (= 4.6.2)
+    - ShengwangRtcEngine_iOS/AIAECLL (= 4.6.2)
+    - ShengwangRtcEngine_iOS/AINS (= 4.6.2)
+    - ShengwangRtcEngine_iOS/AINSLL (= 4.6.2)
+    - ShengwangRtcEngine_iOS/AudioBeauty (= 4.6.2)
+    - ShengwangRtcEngine_iOS/ClearVision (= 4.6.2)
+    - ShengwangRtcEngine_iOS/ContentInspect (= 4.6.2)
+    - ShengwangRtcEngine_iOS/FaceCapture (= 4.6.2)
+    - ShengwangRtcEngine_iOS/FaceDetection (= 4.6.2)
+    - ShengwangRtcEngine_iOS/LipSync (= 4.6.2)
+    - ShengwangRtcEngine_iOS/ReplayKit (= 4.6.2)
+    - ShengwangRtcEngine_iOS/RtcBasic (= 4.6.2)
+    - ShengwangRtcEngine_iOS/SpatialAudio (= 4.6.2)
+    - ShengwangRtcEngine_iOS/VideoAv1CodecEnc (= 4.6.2)
+    - ShengwangRtcEngine_iOS/VideoCodecEnc (= 4.6.2)
+    - ShengwangRtcEngine_iOS/VirtualBackground (= 4.6.2)
+    - ShengwangRtcEngine_iOS/VQA (= 4.6.2)
+  - ShengwangRtcEngine_iOS/AIAEC (4.6.2)
+  - ShengwangRtcEngine_iOS/AIAECLL (4.6.2)
+  - ShengwangRtcEngine_iOS/AINS (4.6.2)
+  - ShengwangRtcEngine_iOS/AINSLL (4.6.2)
+  - ShengwangRtcEngine_iOS/AudioBeauty (4.6.2)
+  - ShengwangRtcEngine_iOS/ClearVision (4.6.2)
+  - ShengwangRtcEngine_iOS/ContentInspect (4.6.2)
+  - ShengwangRtcEngine_iOS/FaceCapture (4.6.2)
+  - ShengwangRtcEngine_iOS/FaceDetection (4.6.2)
+  - ShengwangRtcEngine_iOS/LipSync (4.6.2)
+  - ShengwangRtcEngine_iOS/ReplayKit (4.6.2)
+  - ShengwangRtcEngine_iOS/RtcBasic (4.6.2):
+    - ShengwangInfra_iOS (= 1.3.5)
+  - ShengwangRtcEngine_iOS/SpatialAudio (4.6.2)
+  - ShengwangRtcEngine_iOS/VideoAv1CodecEnc (4.6.2)
+  - ShengwangRtcEngine_iOS/VideoCodecEnc (4.6.2)
+  - ShengwangRtcEngine_iOS/VirtualBackground (4.6.2)
+  - ShengwangRtcEngine_iOS/VQA (4.6.2)
+
+DEPENDENCIES:
+  - agora_rtc (from `.symlinks/plugins/agora_rtc/ios`)
+  - Flutter (from `Flutter`)
+  - integration_test (from `.symlinks/plugins/integration_test/ios`)
+  - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
+
+SPEC REPOS:
+  trunk:
+    - ShengwangInfra_iOS
+    - ShengwangRtcEngine_iOS
+
+EXTERNAL SOURCES:
+  agora_rtc:
+    :path: ".symlinks/plugins/agora_rtc/ios"
+  Flutter:
+    :path: Flutter
+  integration_test:
+    :path: ".symlinks/plugins/integration_test/ios"
+  permission_handler_apple:
+    :path: ".symlinks/plugins/permission_handler_apple/ios"
+
+SPEC CHECKSUMS:
+  agora_rtc: 87a13aeab9d5c92d3e3238f6ef3cf95503e0a26e
+  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
+  integration_test: 4a889634ef21a45d28d50d622cf412dc6d9f586e
+  permission_handler_apple: 4ed2196e43d0651e8ff7ca3483a069d469701f2d
+  ShengwangInfra_iOS: 0ae2d429ec428cdbaebb39ac883ec64c5c20f7bb
+  ShengwangRtcEngine_iOS: f2f2ae79c5909bb51d138bb4ec62c6761c0ab9a3
+
+PODFILE CHECKSUM: 7605c4844d3743a1cda9b4def627a6d5edf370e4
+
+COCOAPODS: 1.16.2

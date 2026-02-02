@@ -1,0 +1,11 @@
+{
+  "name": "agora_rtc",
+  "version": "1.0.0",
+  "description": "Flutter OHOS 声网 RTC 插件",
+  "main": "index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@shengwang/rtc-full": "file:./libs/AgoraRtcSdk.har"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "module": {
+    "name": "agora_rtc",
+    "type": "har",
+    "deviceTypes": [
+      "default",
+      "tablet"
+    ],
+    "requestPermissions": [
+      {"name": "ohos.permission.INTERNET"}
+    ]
+  }
+}
