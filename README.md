@@ -76,4 +76,8 @@ dependencies:
 ## 说明
 
 匆匆忙忙构建了这个插件包，大多方法/回调没有得到验证；使用时需要留意。
-另外我提供了一个skill，它可能会对你有帮助，当你对`agent`说：帮我集成 https://doc.shengwang.cn/api-ref/rtc/flutter/API/toc_publishnsubscribe#setDualStreamMode 时，他应该会工作，按照现有的结构帮你集成。
+
+这三个文档应该能帮助你快速拓展集成
+- android/src/main/kotlin/com/changteng/agora_rtc/dev_android.md
+- ohos/src/main/ets/components/plugin/dev_ohos.md
+- ios/Classes/dev_ios.md

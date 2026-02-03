@@ -113,23 +113,12 @@ class _TestPageState extends State<TestPage> {
   bool _videoEnabled = true;
   bool _localVideoEnabled = true;
   bool _micPublishing = false;
-  String _lastRecordPath = '';
 
   @override
   void initState() {
     super.initState();
     _subscription = _controller.events.listen((event) {
-      _appendLog('CALLBACK: ${event.type} -> ${event.data}');
-      if (event.type == AgoraEventType.snapshotTaken) {
-        final AgoraSnapshotTakenEvent snapshot = event.data as AgoraSnapshotTakenEvent;
-        _logFileInfo('截图', snapshot.filePath);
-      }
-      if (event.type == AgoraEventType.recorderStateChanged) {
-        final String path = _lastRecordPath;
-        if (path.isNotEmpty) {
-          _logFileInfo('录制', path);
-        }
-      }
+      _appendLog('CALLBACK: ${event.data.toString()}');
     }, onError: (Object error) {
       _appendLog('CALLBACK_ERROR: $error');
     });
@@ -150,25 +139,11 @@ class _TestPageState extends State<TestPage> {
     });
   }
 
-  Future<void> _logFileInfo(String label, String path) async {
-    if (path.isEmpty) {
-      _appendLog('$label 文件路径为空');
-      return;
-    }
-    final File file = File(path);
-    final bool exists = await file.exists();
-    if (!exists) {
-      _appendLog('$label 文件不存在: $path');
-      return;
-    }
-    final int size = await file.length();
-    _appendLog('$label 文件: $path (size: $size bytes)');
-  }
-
-  Future<void> _runAction(String name, Future<void> Function() action) async {
+  Future<void> _runAction(String name, Future<int?> Function() action) async {
     _appendLog('ACTION: $name');
     try {
-      await action();
+      final int? code = await action();
+      _appendLog('ACTION RESULT: $name -> ${code ?? 'null'}');
     } catch (e) {
       _appendLog('ERROR: $name -> $e');
     }
@@ -234,11 +209,11 @@ class _TestPageState extends State<TestPage> {
                         final bool granted = await ensureMicrophonePermission();
                         if (!granted) {
                           _appendLog('麦克风权限未授予，无法上麦');
-                          return;
+                          return -1;
                         }
                         _micPublishing = !_micPublishing;
                         setState(() {});
-                        await _controller.updateChannelMediaOptions(
+                        return await _controller.updateChannelMediaOptions(
                           options: _defaultOptions(),
                         );
                       },
@@ -257,7 +232,7 @@ class _TestPageState extends State<TestPage> {
                       () async {
                         _remoteAudioMuted = !_remoteAudioMuted;
                         setState(() {});
-                        await _controller.muteAllRemoteAudioStreams(muted: _remoteAudioMuted);
+                        return await _controller.muteAllRemoteAudioStreams(muted: _remoteAudioMuted);
                       },
                     ),
                     _buildButton(
@@ -265,7 +240,7 @@ class _TestPageState extends State<TestPage> {
                       () async {
                         _remoteVideoMuted = !_remoteVideoMuted;
                         setState(() {});
-                        await _controller.muteAllRemoteVideoStreams(muted: _remoteVideoMuted);
+                        return await _controller.muteAllRemoteVideoStreams(muted: _remoteVideoMuted);
                       },
                     ),
                     _buildButton(
@@ -281,7 +256,7 @@ class _TestPageState extends State<TestPage> {
                       () async {
                         _localAudioMuted = !_localAudioMuted;
                         setState(() {});
-                        await _controller.muteLocalAudioStream(muted: _localAudioMuted);
+                        return await _controller.muteLocalAudioStream(muted: _localAudioMuted);
                       },
                     ),
                     _buildButton(
@@ -289,7 +264,7 @@ class _TestPageState extends State<TestPage> {
                       () async {
                         _localVideoMuted = !_localVideoMuted;
                         setState(() {});
-                        await _controller.muteLocalVideoStream(muted: _localVideoMuted);
+                        return await _controller.muteLocalVideoStream(muted: _localVideoMuted);
                       },
                     ),
                     _buildButton(
@@ -301,7 +276,7 @@ class _TestPageState extends State<TestPage> {
                       () async {
                         _videoEnabled = !_videoEnabled;
                         setState(() {});
-                        await _controller.enableVideo(enabled: _videoEnabled);
+                        return await _controller.enableVideo(enabled: _videoEnabled);
                       },
                     ),
                     _buildButton(
@@ -309,7 +284,7 @@ class _TestPageState extends State<TestPage> {
                       () async {
                         _localVideoEnabled = !_localVideoEnabled;
                         setState(() {});
-                        await _controller.enableLocalVideo(enabled: _localVideoEnabled);
+                        return await _controller.enableLocalVideo(enabled: _localVideoEnabled);
                       },
                     ),
                     _buildButton('startPreview', () => _controller.startPreview()),
@@ -318,15 +293,14 @@ class _TestPageState extends State<TestPage> {
                       'takeSnapshot',
                       () async {
                         final String path = await _snapshotPath();
-                        await _controller.takeSnapshot(uid: broadcastUid, filePath: path);
+                        return await _controller.takeSnapshot(uid: broadcastUid, filePath: path);
                       },
                     ),
                     _buildButton(
                       'startRecording',
                       () async {
                         final String path = await _recordPath();
-                        _lastRecordPath = path;
-                        await _controller.startRecording(
+                        return _controller.startRecording(
                           config: <String, Object?>{
                             'channelId': channelId,
                             'uid': broadcastUid,
@@ -363,7 +337,7 @@ class _TestPageState extends State<TestPage> {
     );
   }
 
-  Widget _buildButton(String label, Future<void> Function() action) {
+  Widget _buildButton(String label, Future<int?> Function() action) {
     return ElevatedButton(
       onPressed: () => _runAction(label, action),
       child: Text(label),
@@ -391,19 +365,11 @@ class _ScenarioPageState extends State<ScenarioPage> {
   void initState() {
     super.initState();
     _subscription = _controller.events.listen((event) {
-      debugPrint(event.data.toString());
+      debugPrint("RTC events callback:${event.data.toString()}");
       if (event.type == AgoraEventType.firstRemoteVideoFrame) {
         setState(() {
           _loading = false;
         });
-      }
-      if (event.type == AgoraEventType.snapshotTaken) {
-        final AgoraSnapshotTakenEvent snapshot = event.data as AgoraSnapshotTakenEvent;
-        debugPrint("snapshot.toString():${snapshot.toString()}");
-      }
-      if (event.type == AgoraEventType.recorderStateChanged) {
-        final AgoraRecorderStateChangedEvent recorder = event.data as AgoraRecorderStateChangedEvent;
-        debugPrint("recorder.toString():${recorder.toString()}");
       }
     }, onError: (Object error) {
       debugPrint('回调错误 $error');

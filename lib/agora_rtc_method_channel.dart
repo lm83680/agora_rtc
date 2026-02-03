@@ -13,24 +13,22 @@ class MethodChannelAgoraRtc extends AgoraRtcPlatform {
   Stream<AgoraEvent>? _eventStream;
 
   @override
-  Future<void> createEngine({
+  Future<int> createEngine({
     required String appId,
   }) async {
-    await methodChannel.invokeMethod<void>('createEngine', <String, Object?>{
+    return _invokeInt('createEngine', <String, Object?>{
       'appId': appId,
     });
   }
 
   @override
-  Future<void> destroyEngine() async {
-    await methodChannel.invokeMethod<void>('destroyEngine');
-  }
+  Future<int> destroyEngine() async => _invokeInt('destroyEngine');
 
   @override
-  Future<void> setChannelProfile({
+  Future<int> setChannelProfile({
     required int profile,
   }) async {
-    await methodChannel.invokeMethod<void>(
+    return _invokeInt(
       'setChannelProfile',
       <String, Object?>{
         'profile': profile,
@@ -39,7 +37,7 @@ class MethodChannelAgoraRtc extends AgoraRtcPlatform {
   }
 
   @override
-  Future<void> joinChannel({
+  Future<int> joinChannel({
     required String token,
     required String channelId,
 
@@ -49,7 +47,7 @@ class MethodChannelAgoraRtc extends AgoraRtcPlatform {
     /// 加入频道选项（由原生侧映射）。
     Map<String, Object?>? options,
   }) async {
-    await methodChannel.invokeMethod<void>(
+    return _invokeInt(
       'joinChannel',
       <String, Object?>{
         'token': token,
@@ -61,15 +59,13 @@ class MethodChannelAgoraRtc extends AgoraRtcPlatform {
   }
 
   @override
-  Future<void> leaveChannel() async {
-    await methodChannel.invokeMethod<void>('leaveChannel');
-  }
+  Future<int> leaveChannel() async => _invokeInt('leaveChannel');
 
   @override
-  Future<void> updateChannelMediaOptions({
+  Future<int> updateChannelMediaOptions({
     required Map<String, Object?> options,
   }) async {
-    await methodChannel.invokeMethod<void>(
+    return _invokeInt(
       'updateChannelMediaOptions',
       <String, Object?>{
         'options': options,
@@ -78,10 +74,10 @@ class MethodChannelAgoraRtc extends AgoraRtcPlatform {
   }
 
   @override
-  Future<void> renewToken({
+  Future<int> renewToken({
     required String token,
   }) async {
-    await methodChannel.invokeMethod<void>(
+    return _invokeInt(
       'renewToken',
       <String, Object?>{
         'token': token,
@@ -90,13 +86,13 @@ class MethodChannelAgoraRtc extends AgoraRtcPlatform {
   }
 
   @override
-  Future<void> setClientRole({
+  Future<int> setClientRole({
     required int role,
 
     /// 1-低延迟 2-超低延迟。
     int? latencyLevel,
   }) async {
-    await methodChannel.invokeMethod<void>(
+    return _invokeInt(
       'setClientRole',
       <String, Object?>{
         'role': role,
@@ -106,10 +102,10 @@ class MethodChannelAgoraRtc extends AgoraRtcPlatform {
   }
 
   @override
-  Future<void> muteAllRemoteAudioStreams({
+  Future<int> muteAllRemoteAudioStreams({
     required bool muted,
   }) async {
-    await methodChannel.invokeMethod<void>(
+    return _invokeInt(
       'muteAllRemoteAudioStreams',
       <String, Object?>{
         'muted': muted,
@@ -118,10 +114,10 @@ class MethodChannelAgoraRtc extends AgoraRtcPlatform {
   }
 
   @override
-  Future<void> muteAllRemoteVideoStreams({
+  Future<int> muteAllRemoteVideoStreams({
     required bool muted,
   }) async {
-    await methodChannel.invokeMethod<void>(
+    return _invokeInt(
       'muteAllRemoteVideoStreams',
       <String, Object?>{
         'muted': muted,
@@ -130,11 +126,11 @@ class MethodChannelAgoraRtc extends AgoraRtcPlatform {
   }
 
   @override
-  Future<void> muteRemoteAudioStream({
+  Future<int> muteRemoteAudioStream({
     required int uid,
     required bool muted,
   }) async {
-    await methodChannel.invokeMethod<void>(
+    return _invokeInt(
       'muteRemoteAudioStream',
       <String, Object?>{
         'uid': uid,
@@ -144,11 +140,11 @@ class MethodChannelAgoraRtc extends AgoraRtcPlatform {
   }
 
   @override
-  Future<void> muteRemoteVideoStream({
+  Future<int> muteRemoteVideoStream({
     required int uid,
     required bool muted,
   }) async {
-    await methodChannel.invokeMethod<void>(
+    return _invokeInt(
       'muteRemoteVideoStream',
       <String, Object?>{
         'uid': uid,
@@ -158,10 +154,10 @@ class MethodChannelAgoraRtc extends AgoraRtcPlatform {
   }
 
   @override
-  Future<void> muteLocalAudioStream({
+  Future<int> muteLocalAudioStream({
     required bool muted,
   }) async {
-    await methodChannel.invokeMethod<void>(
+    return _invokeInt(
       'muteLocalAudioStream',
       <String, Object?>{
         'muted': muted,
@@ -170,10 +166,10 @@ class MethodChannelAgoraRtc extends AgoraRtcPlatform {
   }
 
   @override
-  Future<void> muteLocalVideoStream({
+  Future<int> muteLocalVideoStream({
     required bool muted,
   }) async {
-    await methodChannel.invokeMethod<void>(
+    return _invokeInt(
       'muteLocalVideoStream',
       <String, Object?>{
         'muted': muted,
@@ -182,11 +178,11 @@ class MethodChannelAgoraRtc extends AgoraRtcPlatform {
   }
 
   @override
-  Future<void> setRemoteVideoStreamType({
+  Future<int> setRemoteVideoStreamType({
     required int uid,
     required int streamType,
   }) async {
-    await methodChannel.invokeMethod<void>(
+    return _invokeInt(
       'setRemoteVideoStreamType',
       <String, Object?>{
         'uid': uid,
@@ -196,10 +192,10 @@ class MethodChannelAgoraRtc extends AgoraRtcPlatform {
   }
 
   @override
-  Future<void> enableVideo({
+  Future<int> enableVideo({
     required bool enabled,
   }) async {
-    await methodChannel.invokeMethod<void>(
+    return _invokeInt(
       'enableVideo',
       <String, Object?>{
         'enabled': enabled,
@@ -208,10 +204,10 @@ class MethodChannelAgoraRtc extends AgoraRtcPlatform {
   }
 
   @override
-  Future<void> enableLocalVideo({
+  Future<int> enableLocalVideo({
     required bool enabled,
   }) async {
-    await methodChannel.invokeMethod<void>(
+    return _invokeInt(
       'enableLocalVideo',
       <String, Object?>{
         'enabled': enabled,
@@ -220,10 +216,10 @@ class MethodChannelAgoraRtc extends AgoraRtcPlatform {
   }
 
   @override
-  Future<void> startPreview({
+  Future<int> startPreview({
     int? sourceType,
   }) async {
-    await methodChannel.invokeMethod<void>(
+    return _invokeInt(
       'startPreview',
       <String, Object?>{
         'sourceType': sourceType,
@@ -232,10 +228,10 @@ class MethodChannelAgoraRtc extends AgoraRtcPlatform {
   }
 
   @override
-  Future<void> stopPreview({
+  Future<int> stopPreview({
     int? sourceType,
   }) async {
-    await methodChannel.invokeMethod<void>(
+    return _invokeInt(
       'stopPreview',
       <String, Object?>{
         'sourceType': sourceType,
@@ -244,11 +240,11 @@ class MethodChannelAgoraRtc extends AgoraRtcPlatform {
   }
 
   @override
-  Future<void> takeSnapshot({
+  Future<int> takeSnapshot({
     required int uid,
     required String filePath,
   }) async {
-    await methodChannel.invokeMethod<void>(
+    return _invokeInt(
       'takeSnapshot',
       <String, Object?>{
         'uid': uid,
@@ -258,10 +254,10 @@ class MethodChannelAgoraRtc extends AgoraRtcPlatform {
   }
 
   @override
-  Future<void> startRecording({
+  Future<int> startRecording({
     required Map<String, Object?> config,
   }) async {
-    await methodChannel.invokeMethod<void>(
+    return _invokeInt(
       'startRecording',
       <String, Object?>{
         'config': config,
@@ -270,8 +266,12 @@ class MethodChannelAgoraRtc extends AgoraRtcPlatform {
   }
 
   @override
-  Future<void> stopRecording() async {
-    await methodChannel.invokeMethod<void>('stopRecording');
+  Future<int> stopRecording() async => _invokeInt('stopRecording');
+
+  /// 原生返回值为 int：0 成功，<0 失败。
+  Future<int> _invokeInt(String method, [Map<String, Object?>? arguments]) async {
+    final int? code = await methodChannel.invokeMethod<int>(method, arguments);
+    return code ?? -1;
   }
 
   @override

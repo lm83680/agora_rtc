@@ -11,17 +11,17 @@ class AgoraRtcController {
   final String appId;
 
   /// 创建并初始化 RtcEngine。
-  Future<void> createEngine() {
+  Future<int> createEngine() {
     return AgoraRtcPlatform.instance.createEngine(appId: appId);
   }
 
   /// 销毁 RtcEngine。
-  Future<void> destroyEngine() {
+  Future<int> destroyEngine() {
     return AgoraRtcPlatform.instance.destroyEngine();
   }
 
   /// 设置频道场景。
-  Future<void> setChannelProfile({
+  Future<int> setChannelProfile({
     required int profile,
   }) {
     return AgoraRtcPlatform.instance.setChannelProfile(
@@ -30,7 +30,7 @@ class AgoraRtcController {
   }
 
   /// 加入频道。
-  Future<void> joinChannel({
+  Future<int> joinChannel({
     required String token,
     required String channelId,
 
@@ -49,12 +49,12 @@ class AgoraRtcController {
   }
 
   /// 离开频道。
-  Future<void> leaveChannel() {
+  Future<int> leaveChannel() {
     return AgoraRtcPlatform.instance.leaveChannel();
   }
 
   /// 更新频道媒体选项（加入频道后调用）。
-  Future<void> updateChannelMediaOptions({
+  Future<int> updateChannelMediaOptions({
     required Map<String, Object?> options,
   }) {
     return AgoraRtcPlatform.instance.updateChannelMediaOptions(
@@ -63,7 +63,7 @@ class AgoraRtcController {
   }
 
   /// 更新 Token。
-  Future<void> renewToken({
+  Future<int> renewToken({
     required String token,
   }) {
     return AgoraRtcPlatform.instance.renewToken(
@@ -72,7 +72,7 @@ class AgoraRtcController {
   }
 
   /// 设置用户角色与延时级别。
-  Future<void> setClientRole({
+  Future<int> setClientRole({
     required int role,
 
     /// 1-低延迟 2-超低延迟。
@@ -85,7 +85,7 @@ class AgoraRtcController {
   }
 
   /// 取消或恢复订阅所有远端音频流。
-  Future<void> muteAllRemoteAudioStreams({
+  Future<int> muteAllRemoteAudioStreams({
     required bool muted,
   }) {
     return AgoraRtcPlatform.instance.muteAllRemoteAudioStreams(
@@ -94,7 +94,7 @@ class AgoraRtcController {
   }
 
   /// 取消或恢复订阅所有远端视频流。
-  Future<void> muteAllRemoteVideoStreams({
+  Future<int> muteAllRemoteVideoStreams({
     required bool muted,
   }) {
     return AgoraRtcPlatform.instance.muteAllRemoteVideoStreams(
@@ -103,7 +103,7 @@ class AgoraRtcController {
   }
 
   /// 取消或恢复订阅指定远端用户音频流。
-  Future<void> muteRemoteAudioStream({
+  Future<int> muteRemoteAudioStream({
     required int uid,
     required bool muted,
   }) {
@@ -114,7 +114,7 @@ class AgoraRtcController {
   }
 
   /// 取消或恢复订阅指定远端用户视频流。
-  Future<void> muteRemoteVideoStream({
+  Future<int> muteRemoteVideoStream({
     required int uid,
     required bool muted,
   }) {
@@ -125,7 +125,7 @@ class AgoraRtcController {
   }
 
   /// 取消或恢复发布本地音频流。
-  Future<void> muteLocalAudioStream({
+  Future<int> muteLocalAudioStream({
     required bool muted,
   }) {
     return AgoraRtcPlatform.instance.muteLocalAudioStream(
@@ -134,7 +134,7 @@ class AgoraRtcController {
   }
 
   /// 取消或恢复发布本地视频流。
-  Future<void> muteLocalVideoStream({
+  Future<int> muteLocalVideoStream({
     required bool muted,
   }) {
     return AgoraRtcPlatform.instance.muteLocalVideoStream(
@@ -143,7 +143,7 @@ class AgoraRtcController {
   }
 
   /// 设置订阅的视频流类型。
-  Future<void> setRemoteVideoStreamType({
+  Future<int> setRemoteVideoStreamType({
     required int uid,
     required int streamType,
   }) {
@@ -154,7 +154,7 @@ class AgoraRtcController {
   }
 
   /// 启用或关闭视频模块。
-  Future<void> enableVideo({
+  Future<int> enableVideo({
     /// true-启用 false-关闭。
     required bool enabled,
   }) {
@@ -164,7 +164,7 @@ class AgoraRtcController {
   }
 
   /// 开关本地视频采集。
-  Future<void> enableLocalVideo({
+  Future<int> enableLocalVideo({
     /// true-开启 false-关闭。
     required bool enabled,
   }) {
@@ -174,7 +174,7 @@ class AgoraRtcController {
   }
 
   /// 启动本地视频预览。
-  Future<void> startPreview({
+  Future<int> startPreview({
     /// 视频源类型（由原生侧映射）。
     int? sourceType,
   }) {
@@ -184,7 +184,7 @@ class AgoraRtcController {
   }
 
   /// 停止本地视频预览。
-  Future<void> stopPreview({
+  Future<int> stopPreview({
     /// 视频源类型（由原生侧映射）。
     int? sourceType,
   }) {
@@ -194,7 +194,7 @@ class AgoraRtcController {
   }
 
   /// 对视频截图。
-  Future<void> takeSnapshot({
+  Future<int> takeSnapshot({
     /// 用户 UID，0 表示本地用户。
     required int uid,
 
@@ -208,7 +208,7 @@ class AgoraRtcController {
   }
 
   /// 创建录制实例并开始录制。
-  Future<void> startRecording({
+  Future<int> startRecording({
     /// 录制配置（由原生侧映射）。
     required Map<String, Object?> config,
   }) {
@@ -218,7 +218,7 @@ class AgoraRtcController {
   }
 
   /// 停止录制并销毁录制实例。
-  Future<void> stopRecording() {
+  Future<int> stopRecording() {
     return AgoraRtcPlatform.instance.stopRecording();
   }
 

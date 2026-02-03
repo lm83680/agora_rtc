@@ -67,7 +67,7 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/permission_handler_apple/ios"
 
 SPEC CHECKSUMS:
-  agora_rtc: 87a13aeab9d5c92d3e3238f6ef3cf95503e0a26e
+  agora_rtc: b727b9ccc1734d5cc95d9858a5e2a57f351bbffb
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   integration_test: 4a889634ef21a45d28d50d622cf412dc6d9f586e
   permission_handler_apple: 4ed2196e43d0651e8ff7ca3483a069d469701f2d
