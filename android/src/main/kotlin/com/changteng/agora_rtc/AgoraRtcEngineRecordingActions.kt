@@ -19,6 +19,22 @@ class AgoraRtcEngineRecordingActions(
     shouldDestroyOnStop = false
   }
 
+  fun forceDestroy() {
+    val engine = engineHolder.rtcEngine ?: run {
+      mediaRecorder = null
+      shouldDestroyOnStop = false
+      return
+    }
+    val recorder = mediaRecorder ?: run {
+      shouldDestroyOnStop = false
+      return
+    }
+    recorder.setMediaRecorderObserver(null)
+    engine.destroyMediaRecorder(recorder)
+    mediaRecorder = null
+    shouldDestroyOnStop = false
+  }
+
   fun handleStartRecording(call: MethodCall, result: Result) {
     val engine = engineHolder.rtcEngine
     if (engine == null) {
@@ -63,8 +79,11 @@ class AgoraRtcEngineRecordingActions(
               )
             )
             if (shouldDestroyOnStop) {
-              mediaRecorder?.setMediaRecorderObserver(null)
-              engine.destroyMediaRecorder(mediaRecorder)
+              val recorder = mediaRecorder
+              recorder?.setMediaRecorderObserver(null)
+              if (recorder != null) {
+                engine.destroyMediaRecorder(recorder)
+              }
               mediaRecorder = null
               shouldDestroyOnStop = false
             }

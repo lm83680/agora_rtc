@@ -51,6 +51,7 @@ class AgoraRtcEngineActions(
 
   fun handleDestroyEngine(result: Result) {
     if (engineHolder.rtcEngine != null) {
+      recordingActions.forceDestroy()
       RtcEngine.destroy()
       engineHolder.clear()
     }
@@ -88,6 +89,7 @@ class AgoraRtcEngineActions(
       return
     }
     val code = engine.leaveChannel()
+    recordingActions.forceDestroy()
     result.success(code)
   }
 

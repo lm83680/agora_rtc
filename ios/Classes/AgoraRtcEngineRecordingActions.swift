@@ -18,6 +18,22 @@ final class AgoraRtcEngineRecordingActions: NSObject {
     shouldDestroyOnStop = false
   }
 
+  func forceDestroy() {
+    guard let engine = engineHolder.rtcEngine else {
+      mediaRecorder = nil
+      shouldDestroyOnStop = false
+      return
+    }
+    guard let recorder = mediaRecorder else {
+      shouldDestroyOnStop = false
+      return
+    }
+    recorder.setMediaRecorderDelegate(nil)
+    engine.destroy(recorder)
+    mediaRecorder = nil
+    shouldDestroyOnStop = false
+  }
+
   func handleStartRecording(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
     guard let engine = engineHolder.rtcEngine else {
       result(FlutterError(code: "NO_ENGINE", message: "RtcEngine 未初始化", details: nil))

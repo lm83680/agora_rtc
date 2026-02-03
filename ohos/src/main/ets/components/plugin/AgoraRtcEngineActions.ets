@@ -129,6 +129,7 @@ export class AgoraRtcEngineActions {
       },
     };
     this.recordingActions = new AgoraRtcEngineRecordingActions(
+      this.engineHolder,
       (eventName: string, builder: (data: EventMap) => void) => {
         this.emitEventWithData(eventName, builder);
       },
@@ -191,6 +192,7 @@ export class AgoraRtcEngineActions {
 
   handleDestroyEngine(result: MethodResult): void {
     if (this.engineHolder.rtcEngine != null) {
+      this.recordingActions.forceDestroy();
       RtcEngine.destroy();
       this.engineHolder.clear();
       this.remoteVideoFirstFrameUids.clear();
@@ -227,6 +229,7 @@ export class AgoraRtcEngineActions {
     }
     const code = engine.leaveChannel();
     this.remoteVideoFirstFrameUids.clear();
+    this.recordingActions.forceDestroy();
     result.success(code)
   }
 

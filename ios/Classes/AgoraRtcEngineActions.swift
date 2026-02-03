@@ -38,6 +38,7 @@ final class AgoraRtcEngineActions {
 
   func handleDestroyEngine(result: @escaping FlutterResult) {
     if engineHolder.rtcEngine != nil {
+      recordingActions.forceDestroy()
       AgoraRtcEngineKit.destroy()
       engineHolder.clear()
     }
@@ -72,6 +73,7 @@ final class AgoraRtcEngineActions {
       return
     }
     let code = engine.leaveChannel(nil)
+    recordingActions.forceDestroy()
     result(code)
   }
 

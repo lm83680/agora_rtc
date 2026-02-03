@@ -7,6 +7,7 @@ import {
   RtcEngine,
 } from '@shengwang/rtc-full';
 
+import { AgoraRtcEngineHolder } from './AgoraRtcEngineHolder';
 import { ArgsMap, EventMap, getArg, toRecord } from './AgoraRtcEngineTypes';
 
 export class AgoraRtcEngineRecordingActions {
@@ -15,8 +16,13 @@ export class AgoraRtcEngineRecordingActions {
   private recorderUid: number = 0;
   private mediaRecorderCallback: IMediaRecorderCallback;
   private shouldDestroyOnStop: boolean = false;
+  private engineHolder: AgoraRtcEngineHolder;
 
-  constructor(emitEventWithData: (eventName: string, builder: (data: EventMap) => void) => void) {
+  constructor(
+    engineHolder: AgoraRtcEngineHolder,
+    emitEventWithData: (eventName: string, builder: (data: EventMap) => void) => void
+  ) {
+    this.engineHolder = engineHolder;
     this.mediaRecorderCallback = {
       onRecorderStateChanged: (channelId: string, uid: number, state: number, reason: number) => {
         emitEventWithData("onRecorderStateChanged", (data: EventMap) => {
@@ -27,6 +33,10 @@ export class AgoraRtcEngineRecordingActions {
         });
         if (this.shouldDestroyOnStop && this.mediaRecorder != null) {
           this.mediaRecorder.release();
+          const engine = this.engineHolder.rtcEngine;
+          if (engine != null) {
+            engine.destroyMediaRecorder(this.mediaRecorder);
+          }
           this.mediaRecorder = null;
           this.shouldDestroyOnStop = false;
         }
@@ -40,6 +50,23 @@ export class AgoraRtcEngineRecordingActions {
     this.mediaRecorder = null;
     this.recorderChannelId = "";
     this.recorderUid = 0;
+    this.shouldDestroyOnStop = false;
+  }
+
+  forceDestroy(): void {
+    const engine = this.engineHolder.rtcEngine;
+    if (engine == null) {
+      this.mediaRecorder = null;
+      this.shouldDestroyOnStop = false;
+      return;
+    }
+    if (this.mediaRecorder == null) {
+      this.shouldDestroyOnStop = false;
+      return;
+    }
+    this.mediaRecorder.release();
+    engine.destroyMediaRecorder(this.mediaRecorder);
+    this.mediaRecorder = null;
     this.shouldDestroyOnStop = false;
   }
 
