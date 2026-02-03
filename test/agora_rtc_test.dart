@@ -37,22 +37,25 @@ class MockAgoraRtcPlatform with MockPlatformInterfaceMixin implements AgoraRtcPl
   int destroyCount = 0;
 
   @override
-  Future<void> createEngine({required String appId}) async {
+  Future<int> createEngine({required String appId}) async {
     lastAppId = appId;
+    return 0;
   }
 
   @override
-  Future<void> destroyEngine() async {
+  Future<int> destroyEngine() async {
     destroyCount += 1;
+    return 0;
   }
 
   @override
-  Future<void> setChannelProfile({required int profile}) async {
+  Future<int> setChannelProfile({required int profile}) async {
     lastChannelProfile = profile;
+    return 0;
   }
 
   @override
-  Future<void> joinChannel({
+  Future<int> joinChannel({
     required String token,
     required String channelId,
     int uid = 0,
@@ -62,116 +65,135 @@ class MockAgoraRtcPlatform with MockPlatformInterfaceMixin implements AgoraRtcPl
     lastJoinChannelId = channelId;
     lastJoinUid = uid;
     lastJoinOptions = options;
+    return 0;
   }
 
   @override
-  Future<void> leaveChannel() async {
+  Future<int> leaveChannel() async {
     leaveChannelCount += 1;
+    return 0;
   }
 
   @override
-  Future<void> updateChannelMediaOptions({required Map<String, Object?> options}) async {
+  Future<int> updateChannelMediaOptions({required Map<String, Object?> options}) async {
     lastMediaOptions = options;
+    return 0;
   }
 
   @override
-  Future<void> renewToken({required String token}) async {
+  Future<int> renewToken({required String token}) async {
     lastRenewToken = token;
+    return 0;
   }
 
   @override
-  Future<void> setClientRole({
+  Future<int> setClientRole({
     required int role,
     int? latencyLevel,
   }) async {
     lastClientRole = role;
     lastClientRoleOptions = latencyLevel == null ? null : <String, Object?>{'latencyLevel': latencyLevel};
+    return 0;
   }
 
   @override
-  Future<void> muteAllRemoteAudioStreams({required bool muted}) async {
+  Future<int> muteAllRemoteAudioStreams({required bool muted}) async {
     lastMuteAllRemoteAudio = muted;
+    return 0;
   }
 
   @override
-  Future<void> muteAllRemoteVideoStreams({required bool muted}) async {
+  Future<int> muteAllRemoteVideoStreams({required bool muted}) async {
     lastMuteAllRemoteVideo = muted;
+    return 0;
   }
 
   @override
-  Future<void> muteRemoteAudioStream({
+  Future<int> muteRemoteAudioStream({
     required int uid,
     required bool muted,
   }) async {
     lastMuteRemoteAudioUid = uid;
     lastMuteRemoteAudioMuted = muted;
+    return 0;
   }
 
   @override
-  Future<void> muteRemoteVideoStream({
+  Future<int> muteRemoteVideoStream({
     required int uid,
     required bool muted,
   }) async {
     lastMuteRemoteVideoUid = uid;
     lastMuteRemoteVideoMuted = muted;
+    return 0;
   }
 
   @override
-  Future<void> muteLocalAudioStream({required bool muted}) async {
+  Future<int> muteLocalAudioStream({required bool muted}) async {
     lastMuteLocalAudio = muted;
+    return 0;
   }
 
   @override
-  Future<void> muteLocalVideoStream({required bool muted}) async {
+  Future<int> muteLocalVideoStream({required bool muted}) async {
     lastMuteLocalVideo = muted;
+    return 0;
   }
 
   @override
-  Future<void> setRemoteVideoStreamType({
+  Future<int> setRemoteVideoStreamType({
     required int uid,
     required int streamType,
   }) async {
     lastRemoteVideoStreamTypeUid = uid;
     lastRemoteVideoStreamType = streamType;
+    return 0;
   }
 
   @override
-  Future<void> enableVideo({required bool enabled}) async {
+  Future<int> enableVideo({required bool enabled}) async {
     lastEnableVideo = enabled;
+    return 0;
   }
 
   @override
-  Future<void> enableLocalVideo({required bool enabled}) async {
+  Future<int> enableLocalVideo({required bool enabled}) async {
     lastEnableLocalVideo = enabled;
+    return 0;
   }
 
   @override
-  Future<void> startPreview({int? sourceType}) async {
+  Future<int> startPreview({int? sourceType}) async {
     lastStartPreviewSourceType = sourceType;
+    return 0;
   }
 
   @override
-  Future<void> stopPreview({int? sourceType}) async {
+  Future<int> stopPreview({int? sourceType}) async {
     lastStopPreviewSourceType = sourceType;
+    return 0;
   }
 
   @override
-  Future<void> takeSnapshot({
+  Future<int> takeSnapshot({
     required int uid,
     required String filePath,
   }) async {
     lastSnapshotUid = uid;
     lastSnapshotFilePath = filePath;
+    return 0;
   }
 
   @override
-  Future<void> startRecording({required Map<String, Object?> config}) async {
+  Future<int> startRecording({required Map<String, Object?> config}) async {
     lastRecordingConfig = config;
+    return 0;
   }
 
   @override
-  Future<void> stopRecording() async {
+  Future<int> stopRecording() async {
     stopRecordingCount += 1;
+    return 0;
   }
 
   @override
